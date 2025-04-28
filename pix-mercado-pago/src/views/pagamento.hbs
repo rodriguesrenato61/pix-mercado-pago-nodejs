@@ -1,0 +1,26 @@
+<h1>{{titulo_pagamento}}</h1>
+<div class="wrapper">
+    <div class="status">
+        <div class="status-header">
+            <h4>Informação do pagamento</h4>
+        </div>
+        <div id="pagamento-info">
+        <br>
+        <p>Código de referência: {{external_reference}}</p>
+        <p>Produto: {{produtoPagamento.produto_nome}}</p>
+        <p>Valor: {{produtoPagamento.valor_formatado}}</p>
+        <p>Status: {{produtoPagamento.status_pagamento}}</p>
+        <p>Comprador: {{produtoPagamento.comprador}}</p>
+        <p>Data solicitação: {{produtoPagamento.data_criacao_br}}</p>
+            {{#if pago }}
+                <p>Data pagamento {{produtoPagamento.data_atualizacao_br}}</p>
+            {{/if}}
+        </div>
+    
+    </div>
+
+    <a class="btn-retorno" href="{{url_retorno}}">
+        <div>Ir para o site</div>
+    </a>
+
+</div>

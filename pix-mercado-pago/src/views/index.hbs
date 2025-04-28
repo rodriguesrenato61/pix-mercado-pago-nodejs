@@ -1,0 +1,46 @@
+<input type="hidden" id="pix-expiracao" name="pix-expiracao" value="{{pix_expiracao}}" />
+
+<div id="modalfundo">
+</div>
+
+<div class="spinner">
+</div>
+
+<div id="modalpixcontent">
+    <div id="modalpixhead">
+        <h3>Coloque seu email</h3>
+        <a href="" id="modalpixclose">&times;</a>
+    </div>
+    <div id="modalpixbody">
+        <form id="form-gera-pix">
+            <div class="input-box">
+                <input type="text" id="email" placeholder="fulano@gmail.com" autocomplete="off" maxlength="50" required />
+            </div>
+            <div class="box-button">
+                <button type="submit" id="btn-gera-pix">Gerar Pix</buttom>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="modalcontent">
+    <div id="modalhead">
+        <h3 id="pix-title">QRCODE PIX</h3>
+    </div>
+    <div id="modalbody"></div>
+    <div id="modalbottom">
+        <input id="copia-cola" placeholder="Código copia e cola" readonly/>
+        <a href="" id="btn-copiar">
+            <img src="img/content_copy.svg" />
+        </a>
+    </div>
+</div>
+		
+<div class="container">
+    {{#each produtos}}
+        <div class="item-box" data-id="{{id}}">
+            <h4>{{nome}} - {{valor_formatado}}</h4>
+        </div>
+    {{/each}}
+</div>
+<script type="text/javascript" src="js/scripts.js"></script>
