@@ -5,10 +5,10 @@ Esta aplicação foi construída utilizando o NodeJs como backend, banco de dado
 
 Para testar é necessário ter credenciais próprias de acesso a API do Mercado Pago para gerar o PIX. O webhook ainda não foi implementado, será feito somente quando a aplicação estiver online, mas caso queira implementar e estiver com dúvidas é só entrar em contato com o email a seguir.
 
+Para qualquer dúvida ou contratar para novos trabalhos mandar email para rrodrigues.dev01@gmail.com.
+
 ### Vídeo tutorial
 https://www.youtube.com/watch?v=tMUaYeBM_XU
-
-Para qualquer dúvida ou contratar para novos trabalhos mandar email para rrodrigues.dev01@gmail.com.
 
 ### Ambiente utilizado
 npm versão 10.9.0
