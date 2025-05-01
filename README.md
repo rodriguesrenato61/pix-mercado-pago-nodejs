@@ -3,7 +3,7 @@
 
 Esta aplicação foi construída utilizando o NodeJs como backend, banco de dados SQLite e para o frontend foram utilizados HTML, CSS e Javascript.
 
-Para testar é necessário ter credenciais próprias de acesso a API do Mercado Pago para gerar o PIX. O webhook ainda não foi implementado, será feito somente quando a aplicação estiver online, mas caso queira implementar e estiver com dúvidas é só entrar em contato com o email a seguir.
+Para testar é necessário ter credenciais próprias de acesso a API do Mercado Pago para gerar o PIX. O webhook já foi implementado e testado somente localmente.
 
 Para qualquer dúvida ou contratar para novos trabalhos mandar email para rrodrigues.dev01@gmail.com.
 
@@ -24,7 +24,7 @@ node versão 22.12.0
 
 #### 3. Crie o banco de dados SQLite com os scripts no arquivo banco.sql. Ou utilize o banco já preexistente no arquivo pix-mercado-pago/src/database.db
 
-#### 4. Coloque as suas credenciais de autenticação PUBLIC_KEY_PROD e ACCESS_TOKEN_PROD da API do Mercado Pago no arquivo pix-mercado-pago/src/helpers/constantes.js e também a url raíz da sua aplicação em BASE_URL.
+#### 4. Coloque as suas credenciais de autenticação PUBLIC_KEY_PROD e ACCESS_TOKEN_PROD da API do Mercado Pago no arquivo pix-mercado-pago/src/helpers/constantes.js e também a url raíz da sua aplicação em BASE_URL. Para que a notificação de pix pago apareça por atualização através do webhook deixe a variável WEBHOOK como verdadeira, caso contrário uma requisição para o Mercado Pago será feita a cada 5 segundos para verificar o status do PIX.
 
 ![constantes](https://github.com/rodriguesrenato61/pix-mercado-pago-nodejs/blob/main/prints/constantes.png)
 

@@ -43,7 +43,7 @@ INSERT INTO produtos(id, nome, valor, data_criacao)
     VALUES(1, 'Curso de Wordpress', 0.15, '2024-06-02 10:14:05'),
     (2, 'Curso de Marketing Digital', 0.06, '2024-06-02 10:14:05'),
     (3, 'Software de Relatórios', 0.07, '2024-06-02 10:14:05'),
-    (4, 'Ebook - Vendas pela internat', 0.08, '2024-06-02 10:14:05'),
+    (4, 'Ebook - Vendas pela internet', 0.08, '2024-06-02 10:14:05'),
     (5, 'Ebook - Receitas baratas', 0.09, '2024-06-02 10:14:05'),
     (6, 'Curso de HTML5', 0.10, '2024-06-02 10:14:05'),
     (7, 'Curso de Php', 0.11, '2024-06-02 10:14:05');

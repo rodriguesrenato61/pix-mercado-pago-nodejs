@@ -73,7 +73,16 @@ function gerarItemPix(){
 
     const email = document.querySelector('#email').value;
 
-    fetch('/comprar/'+idEscolhido+'/'+email)
+    fetch("/comprar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            produto_id: idEscolhido,
+            email: email
+        })
+    })
     .then((response) => {
         return response.json();
     }).then((response) => {
@@ -124,7 +133,7 @@ function monitoraPix(){
 			console.clear();
 			console.log(response);
 			if(response.success){
-                if(response.dados.payment_status == "approved"){
+                if(response.dados.status_pagamento_id == 2){
                     clearInterval(monitora);
 				    pago();
                 }

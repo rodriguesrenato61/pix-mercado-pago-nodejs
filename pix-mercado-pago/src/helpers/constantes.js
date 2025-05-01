@@ -8,6 +8,7 @@ const PUBLIC_KEY_PROD = "";
 const ACCESS_TOKEN_PROD = "";
 const PIX_EXPIRACAO = 3600;
 const FUSO_HORARIO = "-3:00";
+const WEBHOOK = true;
 
 module.exports = {
     BASE_URL,
@@ -19,5 +20,6 @@ module.exports = {
     PUBLIC_KEY_PROD,
     ACCESS_TOKEN_PROD,
     PIX_EXPIRACAO,
-    FUSO_HORARIO
+    FUSO_HORARIO,
+    WEBHOOK
 };

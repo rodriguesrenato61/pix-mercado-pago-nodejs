@@ -67,7 +67,7 @@ const createPayment = async function(external_reference, method, produto_id, com
             transaction_amount: price
         }
     }).then((response) => {
-        return response.data;
+        return response;
     });
 };
 
@@ -80,7 +80,7 @@ const findPayment = async function(dataId){
             'Authorization': `Bearer ${ACCESS_TOKEN_PROD}`
         }
     }).then((response) => {
-        return response.data;
+        return response;
     });
 };
 
