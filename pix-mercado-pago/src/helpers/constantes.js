@@ -1,4 +1,4 @@
-const BASE_URL = "";
+const BASE_URL = "https://www.rrodrigues.dev/pix-mercado-pago";
 const PARTIALS_DIR = "src/views/partials";
 const LAYOUTS_DIR = "src/views/layouts";
 const VIEWS_DIR = "src/views";

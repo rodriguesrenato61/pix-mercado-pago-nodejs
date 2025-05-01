@@ -11,14 +11,16 @@ INSERT INTO provedores_pagamento(id, nome, data_criacao)
 	VALUES(1, 'Mercado Pago', '2024-06-02 10:14:05');
 
 CREATE TABLE logs_webhook_pagamento(
-	id INTEGER AUTO_INCREMENT NOT NULL,
 	provedor_pagamento_id INTEGER,
 	conteudo LONGTEXT,
 	codigo_identificacao VARCHAR(50),
 	data_criacao DATETIME,
-	data_atualizacao DATETIME,
-	PRIMARY KEY(id)
+	data_atualizacao DATETIME
 );
+
+CREATE VIEW vw_logs_webhook_pagamento AS SELECT l.rowid, l.provedor_pagamento_id, p.nome provedor_pagamento, l.conteudo, l.codigo_identificacao, l.data_criacao, l.data_atualizacao
+FROM logs_webhook_pagamento l
+INNER JOIN provedores_pagamento p ON l.provedor_pagamento_id = p.id;
 
 CREATE TABLE status_pagamento(
 	id INTEGER AUTO_INCREMENT NOT NULL,
@@ -31,24 +33,22 @@ INSERT INTO status_pagamento(id, descricao)
 	(4, 'Devolvido'),(5, 'Cancelado'),(6, 'Rejeitado'),(7, 'Cobrado de volta');
 
 CREATE TABLE produtos(
-    id INTEGER AUTO_INCREMENT NOT NULL,
     nome VARCHAR(100),
     valor DOUBLE,
     data_criacao DATETIME,
-    data_atualizacao DATETIME,
-    PRIMARY KEY(id)
+    data_atualizacao DATETIME
 );
 
-INSERT INTO produtos(id, nome, valor, data_criacao)
-    VALUES(1, 'Curso de Wordpress', 0.15, '2024-06-02 10:14:05'),
-    (2, 'Curso de Marketing Digital', 0.06, '2024-06-02 10:14:05'),
-    (3, 'Software de Relatórios', 0.07, '2024-06-02 10:14:05'),
-    (4, 'Ebook - Vendas pela internet', 0.08, '2024-06-02 10:14:05'),
-    (5, 'Ebook - Receitas baratas', 0.09, '2024-06-02 10:14:05'),
-    (6, 'Curso de HTML5', 0.10, '2024-06-02 10:14:05'),
-    (7, 'Curso de Php', 0.11, '2024-06-02 10:14:05');
+INSERT INTO produtos(nome, valor, data_criacao)
+    VALUES('Curso de Wordpress', 0.15, '2024-06-02 10:14:05'),
+    ('Curso de Marketing Digital', 0.06, '2024-06-02 10:14:05'),
+    ('Software de Relatórios', 0.07, '2024-06-02 10:14:05'),
+    ('Ebook - Vendas pela internet', 0.08, '2024-06-02 10:14:05'),
+    ('Ebook - Receitas baratas', 0.09, '2024-06-02 10:14:05'),
+    ('Curso de HTML5', 0.10, '2024-06-02 10:14:05'),
+    ('Curso de Php', 0.11, '2024-06-02 10:14:05');
 
-CREATE VIEW vw_produtos AS SELECT p.id, p.nome, p.valor, p.data_criacao, STRFTIME('%d/%m/%Y %H:%i:%s', p.data_criacao) data_criacao_br, p.data_atualizacao, STRFTIME('%d/%m/%Y %H:%i:%s', p.data_atualizacao) data_atualizacao_br
+CREATE VIEW vw_produtos AS SELECT p.rowid, p.nome, p.valor, p.data_criacao, p.data_atualizacao
 FROM produtos p;
 
 CREATE TABLE produto_pagamentos(
@@ -68,7 +68,7 @@ CREATE TABLE produto_pagamentos(
 
 
 CREATE VIEW vw_produto_pagamentos AS SELECT pp.rowid, pp.produto_id, pp.produto_nome, pp.comprador, pp.email, pp.valor, pp.provedor_pagamento_id, ppg.nome provedor_pagamento, pp.status_pagamento_id, sp.descricao status_pagamento,
-pp.arquivo_transacao, pp.payment_id, pp.codigo_insercao, pp.data_criacao, STRFTIME('%d/%m/%Y %H:%i:%s', pp.data_criacao) data_criacao_br, pp.data_atualizacao, STRFTIME('%d/%m/%Y %H:%i:%s', pp.data_atualizacao) data_atualizacao_br
+pp.arquivo_transacao, pp.payment_id, pp.codigo_insercao, pp.data_criacao, pp.data_atualizacao
 FROM produto_pagamentos pp
 INNER JOIN provedores_pagamento ppg ON pp.provedor_pagamento_id = ppg.id
 INNER JOIN status_pagamento sp ON pp.status_pagamento_id = sp.id;

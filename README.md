@@ -3,7 +3,7 @@
 
 Esta aplicação foi construída utilizando o NodeJs como backend, banco de dados SQLite e para o frontend foram utilizados HTML, CSS e Javascript.
 
-Para testar é necessário ter credenciais próprias de acesso a API do Mercado Pago para gerar o PIX. O webhook já foi implementado e testado somente localmente.
+Para testar é necessário ter credenciais próprias de acesso a API do Mercado Pago para gerar o PIX. O webhook já foi implementado e testado somente localmente através do postman, todos os logs de notificação do webhook ficam na tabela logs_webhook_pagamento.
 
 Para qualquer dúvida ou contratar para novos trabalhos mandar email para rrodrigues.dev01@gmail.com.
 

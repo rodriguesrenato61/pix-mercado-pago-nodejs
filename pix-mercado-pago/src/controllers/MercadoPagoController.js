@@ -1,6 +1,7 @@
 const { WEBHOOK } = require('../helpers/constantes');
 const ProdutoPagamentoRepository = require('../repositories/ProdutoPagamentoRepository.js');
 const TransacaoRepository = require('../repositories/TransacaoRepository.js');
+const LogWebhookPagamentoRepository = require('../repositories/LogWebhookPagamentoRepository.js');
 const Utilitarios = require('../utils/Utilitarios.js');
 const MercadoPagoClientApi = require('../api/MercadoPagoClientApi.js');
 
@@ -121,23 +122,42 @@ const findPayment = async function(request, response){
 
 const webhook = async function(request, response){
 
+    let msgLog = "Log webhook pagamento não pode ser registrado";
+
     try {
 
         const data_id = request.query.data_id;
         const type = request.query.type;
         const form = request.body;
 
+        let log_webhook_pagamento = {
+            provedor_pagamento_id: 1,
+            conteudo: JSON.stringify({
+                data_id: data_id,
+                type: type,
+                json: form
+            }),
+            codigo_identificacao: data_id,
+            data_criacao: Utilitarios.getDataAtualString()
+        };
+        const insertLog = await LogWebhookPagamentoRepository.insert(log_webhook_pagamento);
+        if(insertLog.lastID){
+            msgLog = "Log webhook pagamento registrado com sucesso";
+        }
+
         if(data_id == null){
             return response.json({
                 success: false,
-                msg: "data_id não encontrada"
+                msg: "data_id não encontrada",
+                msg_log: msgLog
             });
         }
 			
         if(type != "payment"){
             return response.json({
                 success: false,
-                msg: "type na requisição não é payment"
+                msg: "type na requisição não é payment",
+                msg_log: msgLog
             });
         }
 
@@ -145,7 +165,8 @@ const webhook = async function(request, response){
         if(produto_pagamento == null){
             return response.json({
                 success: false,
-                msg: "Produto pagamento com esse payment_id não encontrado"
+                msg: "Produto pagamento com esse payment_id não encontrado",
+                msg_log: msgLog
             });
         }
 
@@ -178,6 +199,7 @@ const webhook = async function(request, response){
                     return response.json({
                         success: false,
                         msg: "Transação não pode ser cadastrada",
+                        msg_log: msgLog,
                         dados: transacao
                     });
                 }
@@ -228,6 +250,7 @@ const webhook = async function(request, response){
         return response.json({
             success: true,
             msg: msg,
+            msg_log: msgLog,
             dados: {
                 data_id: data_id,
                 type: type,
@@ -243,12 +266,14 @@ const webhook = async function(request, response){
             const messageError = (response_data.message) ? response_data.message : "não foi possível encontrar o payment pix no Mercado Pago";
             return response.json({
                 success: false,
-                msg: response_status+" "+error+": "+messageError
+                msg: response_status+" "+error+": "+messageError,
+                msg_log: msgLog
             });
         }
         return response.json({
             success: false,
-            msg: "Erro webhook: "+e.message
+            msg: "Erro webhook: "+e.message,
+            msg_log: msgLog
         });
     }
 

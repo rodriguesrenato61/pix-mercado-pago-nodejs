@@ -130,8 +130,8 @@ function monitoraPix(){
 		.then((response) => {
 			return response.json();
 		}).then((response) => {
-			console.clear();
-			console.log(response);
+			//console.clear();
+			//console.log(response);
 			if(response.success){
                 if(response.dados.status_pagamento_id == 2){
                     clearInterval(monitora);
